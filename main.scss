@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.containerStart {
+    height: 100vh;
+    background-color: blue;
+
+}
+
+.containerPage {
+    height: 120vh;
+    background-color: purple;
+    
+
+}
+
+.contanierError {
+    height: 100vh;
+    background-color: green;
+}
+.header {
+    
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+.ul {
+    margin: 0;
+    height: 30px;
+    display: flex;
+    list-style-type: none;
+    justify-content: space-evenly;
+    background-color: antiquewhite;
+}
+
+.mainPage {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.headingPage {
+    text-align: center;
+    padding-top: 100px;
+}
+
+.picture {
+    width: 400px;
+}
+
+.footerPage {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: aquamarine;
+}
