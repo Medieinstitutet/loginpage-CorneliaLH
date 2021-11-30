@@ -6,5 +6,5 @@ Två användarnamn:
 Användarnamn: janne 
 Lösenord: test
 
-Användarnamn: Cornelia
+Användarnamn: cornelia
 Lösenord: test
