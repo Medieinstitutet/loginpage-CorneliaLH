@@ -2,37 +2,76 @@ body {
     margin: 0;
     padding: 0;
 }
-.containerStart {
-    height: 100vh;
-    background-color: blue;
 
+#root {
+    height: 120vh;
+}
+.containerStart {
+    height: 120vh;
+    background-color: rgb(240, 206, 235);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+
+}
+
+.containerStartContent {
+    border: 2px solid black;
+    height: 20vh;
+    padding: 30px;
+    
+    
+
+}
+
+.headingStart {
+   
+    text-align: center;
+  
 }
 
 .containerPage {
     height: 120vh;
-    background-color: purple;
+    background-color: rgb(161, 214, 242);
     
 
 }
 
-.contanierError {
-    height: 100vh;
-    background-color: green;
+.containerError {
+    height: 120vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(181, 225, 181);
 }
 .header {
-    
+    display: flex;
+    justify-content: space-around;
+    background-color: antiquewhite;
     width: 100%;
     position: fixed;
     top: 0;
+    height: 100px;
 }
-.ul {
-    margin: 0;
-    height: 30px;
+
+.inputContainer {
     display: flex;
-    list-style-type: none;
-    justify-content: space-evenly;
-    background-color: antiquewhite;
+    justify-content: center;
+    align-items: center;
 }
+.logoContainer {
+    margin: 0;
+    padding: 10px;
+}
+
+.fas {
+    font-size: 70px;
+    color: purple;
+}
+
+
 
 .mainPage {
     height: 100vh;
@@ -57,4 +96,16 @@ body {
     position: fixed;
     bottom: 0;
     background-color: aquamarine;
+    height: 30px;
+    text-align: center;
+    padding: 5px;
+}
+
+.containerErrorNone, .containerStartError, .containerStartNone  {
+    display: none;
+}
+
+.pError {
+    padding: 20px;
+    font-size: 2em;
 }
