@@ -211,7 +211,6 @@ detta för att kunna jämföra om de är samma i if-satsen*/
                     arrayPasswordTwo.push(i)
                 }
             }
-                console.log("arrayName" + arrayName)
                 console.log("index of objectName" + indexOfObjectName)
                 console.log("arraypasswordTwo" + arrayPasswordTwo)
                 console.log(arrayPasswordTwo)
