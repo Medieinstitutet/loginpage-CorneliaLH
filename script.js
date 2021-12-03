@@ -197,27 +197,39 @@ frasen på huvudsidan*/
 
 /*tar ut array från localStorage och matchar om det finns i name/password listan, om det gör det = true*/
                 
+                // let namesInArray = JSON.parse(localStorage.getItem("users")).some(users => users.name == inputNameValue)
+                // let passwordsInArray = JSON.parse(localStorage.getItem("users")).some(users => users.password == passwordValue)
 
 /*tar ut array från localStorage och kör map(funktion för att med hjälp av inputnamn/password ta reda på vilket indexi arrayn de ligger i,
 detta för att kunna jämföra om de är samma i if-satsen*/
 
                 let indexOfObjectName = JSON.parse(localStorage.getItem("users")).map(function(e) {return e.name;}).indexOf(inputNameValue)
-         
-/*Array arrayPasswordTwo samlar alla index som eventuellt har samma password genom forloopen nedanför */
+                
                 let arrayPasswordTwo = [];
                 
                 for (i=0;i<JSON.parse(localStorage.getItem("users")).length;i++) {
                 if (JSON.parse(localStorage.getItem("users"))[i].password == passwordValue) {
                     arrayPasswordTwo.push(i)
+                  
                 }
             }
+                
+                
+                let arrayName = [indexOfObjectName]
+               
+                console.log("arrayName" + arrayName)
                 console.log("index of objectName" + indexOfObjectName)
                 console.log("arraypasswordTwo" + arrayPasswordTwo)
                 console.log(arrayPasswordTwo)
-            
+                console.log(arrayName)
 
-/*if-sats= om index för användarnamn matchar något av indexen med samma password= true annars false.*/ 
+                console.log()
 
+
+
+                
+
+/*if-sats= om namn matchar ett av indexen i password-listan loggas man in*/      
                 if (!arrayName.some(indexUsers => !arrayPasswordTwo.includes(indexUsers)) == true )
                 
 /* vid inloggning sätts status som inloggad i local storage, denna kontrolleras sedan vid uppdatering
@@ -229,10 +241,13 @@ av sidan. Om status:inloggad finns är man kvar på huvudsidan, om inte, hamnar 
                     else
                     {errorPage()}
                     inputName.value = ""           
-                    inputPassword.value = "" 
+                    inputPassword.value = ""  
+
                 }   
             }
            
+    
+
 /*huvudsidan*/
 
     function mainPage() {
