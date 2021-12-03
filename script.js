@@ -3,21 +3,18 @@ starta första funktionen*/
 
 window.addEventListener("load", rootPage)
 
-function clearSite () {
-    const root = document.getElementById("root")
-    localStorage.removeItem("status")
-    localStorage.removeItem("title")
-    root.innerHTML = ""
-    
-    rootPage()
-}
 
-/*start fuktion för inloggningssidan*/
+
+/*start fuktion för inloggningssidan, i denna funktion finns övriga funktioner förutom clear*/
 
 function rootPage () {
+
+/*Element som alltid visas*/
+
     const root = document.getElementById("root")
     const header = document.createElement("header")
     header.className = "header"
+
     const logoContainer = document.createElement("h1")
     logoContainer.className = "logoContainer"
 
@@ -36,6 +33,10 @@ function rootPage () {
     const button1 = document.createElement("button")
     button1.innerText = "Logga in"
 
+    const footerPage = document.createElement("footer")
+    footerPage.className = "footerPage"
+    footerPage.innerText = "Copyright Footer"
+    
 //element som appendas till DOM.  
     
     header.append(logoContainer)
@@ -45,248 +46,274 @@ function rootPage () {
     inputContainer.append(inputPassword)
     root.append(header)
     inputContainer.append(button1)
-    
-    const footerPage = document.createElement("footer")
-    footerPage.className = "footerPage"
-    footerPage.innerText = "Copyright Footer"
     root.append(footerPage)
+    
 
     const containerStart = document.createElement("div")
     const containerPage = document.createElement("div")
     const containerError = document.createElement("div")
 
+//funktion för att local storage ska vara min "single source of truth"
+//De redan inlagda användarna genereras vid första log in/skapande av användare
+    
     function getArrayFromLs() {
         let collectedUsersList = localStorage.getItem("users")
     
-        let users = [{name: "janne",
-                     password: "test"}, 
-                    {name: "cornelia",
-                    password: "prova"}]
+        let users = []
     
         if(collectedUsersList) {
             users = JSON.parse(collectedUsersList)
         } 
         return users
     }
+    
     let users = getArrayFromLs()
-    // let users = [{name: "janne",
-    //             password: "test"},]
+
+//Redan inlagda users, för att undvika dubletter kompletterat med if-sats
+    if (!localStorage.users)
+    {users.push({name: "janne",
+                password: "test"}, 
+                {name: "cornelia",
+                password: "prova"})
+
+    localStorage.setItem("users", JSON.stringify(users))}
+
     let inloggad = localStorage.getItem("status")
+
     startSite()
 
-function startSite()  {
-/*if-sats för att kolla om det finns en status som inloggad
-i local storage, om det finns det så stannar funktionen 
-och går till huvudsidan istället*/
-    containerPage.innerHTML = ""
-    containerError.innerHTML = ""
+        function startSite()  {
 
-    
-    if( inloggad == "inloggad") {
-        nextPage()}
-//element
-    
-    root.append(containerStart)
-    containerStart.className = "containerStart"
-    
-    const containerStartContent = document.createElement("section")
-    containerStart.append(containerStartContent)
-    containerStartContent.className = "containerStartContent"
+        containerPage.innerHTML = ""
+        containerError.innerHTML = ""
 
-    const headingStart = document.createElement("h2")
-    headingStart.className = "headingStart"
-    containerStartContent.append(headingStart)
-    headingStart.innerHTML = "Välkommen"
+    /*if-sats för att kolla om det finns en status som inloggad
+    i local storage, om det finns det så stannar funktionen 
+    och går till huvudsidan istället*/
 
-    const pStart = document.createElement("p")
-    containerStartContent.append(pStart)
-    pStart.innerHTML ="Var vänlig skapa ny användare i formulöret nedanför:"
+        if( inloggad === "inloggad") {
+        mainPage()}
 
-    const form = document.createElement("form")
-    form.id = "form"
-    containerStartContent.append(form)
-
-    const inputNameForm = document.createElement("input")
-    inputNameForm.placeholder = "Användarnamn"
-    inputNameForm.type = "text"
-    
-
-    const inputPasswordForm = document.createElement("input")
-    inputPasswordForm.placeholder = "Password"
-    inputPasswordForm.type = "password"     
-
-    const buttonNewUser = document.createElement("button")
-    buttonNewUser.innerText = "Registrera new användare"
-    buttonNewUser.type = "submit"
-
-    form.append(inputNameForm,inputPasswordForm,buttonNewUser)
-
-    buttonNewUser.addEventListener("click", submitNewUser)
-    
-    
-    
-    
-    
-
-    function submitNewUser(e) {
-        e.preventDefault();
-        let inputNameFormValue = inputNameForm.value
-        let inputPasswordFormValue = inputPasswordForm.value
-
-        validateForm()
-        function validateForm() {
-            if (inputNameFormValue == "" && inputPasswordFormValue =="") {
-                alert("Text måste skrivas i fälten")}
-             if (inputNameForm.value.length < 3)
-            { alert("Användarnamn och password ska bestå av minst 3 bokstäver")} 
-            return false;
-        }
-
-
-
-
-
-        users.push(
-            {name: inputNameFormValue,
-            password: inputPasswordFormValue})
-        localStorage.setItem("users", JSON.stringify(users) )
-        inputNameForm.value = ""
-        inputPasswordForm.value = ""
-      
-    }
-  
+    //element
         
-    // console.log(arrayUsers)
+        root.append(containerStart)
+        containerStart.className = "containerStart"
+        
+        const containerStartContent = document.createElement("section")
+        containerStart.append(containerStartContent)
+        containerStartContent.className = "containerStartContent"
+
+        const headingStart = document.createElement("h2")
+        headingStart.className = "headingStart"
+        containerStartContent.append(headingStart)
+        headingStart.innerHTML = "Välkommen"
+
+        const pStart = document.createElement("p")
+        containerStartContent.append(pStart)
+        pStart.innerHTML ="Var vänlig skapa ny användare i formulöret nedanför:"
+
+    //skapa ny användare form
+
+        const form = document.createElement("form")
+        form.id = "form"
+        containerStartContent.append(form)
+
+        const inputNameForm = document.createElement("input")
+        inputNameForm.placeholder = "Användarnamn"
+        inputNameForm.type = "text"
+        
+        const inputPasswordForm = document.createElement("input")
+        inputPasswordForm.placeholder = "Password"
+        inputPasswordForm.type = "password"    
+
+    //knapp 
+
+        const buttonNewUser = document.createElement("button")
+        buttonNewUser.innerText = "Registrera new användare"
+        buttonNewUser.type = "submit"
+
+        form.append(inputNameForm,inputPasswordForm,buttonNewUser)
+
+        buttonNewUser.addEventListener("click", submitNewUser)
+    
+/*Skapa ny användare, submit stoppas från att ladda om sidan genom eventet preventdefault
+Validering för: om textfält är tomt
+                om användarnamn eller password är kortare än 3 bokstäver
+                om användarnamn redan finns
+Om ingen av dem är true, får man skapa en användare som pushas till array och lagars i 
+local storage
+Inputfältet töms därefter*/
+
+            function submitNewUser(e) {
+                e.preventDefault();
+                let inputNameFormValue = inputNameForm.value
+                let inputPasswordFormValue = inputPasswordForm.value
+
+                validateForm()
+                function validateForm() {
+                    if (inputNameFormValue == "" || inputPasswordFormValue =="") {
+                        alert("Text måste skrivas i fälten")
+                        inputNameForm.value = ""
+                        inputPasswordForm.value = ""}
+                        
+                    if (inputNameForm.value.length < 3 || inputPasswordForm.value.length < 3)
+                    { alert("Användarnamn och password ska bestå av minst 3 bokstäver")
+                    inputNameForm.value = ""
+                    inputPasswordForm.value = ""} 
+                    if (JSON.parse(localStorage.getItem("users")).some(person => person.name === inputNameFormValue))
+                    {alert("Användarnamn är upptaget, försök med annat")}
+                    else {
+                        users.push(
+                            {name: inputNameFormValue,
+                            password: inputPasswordFormValue})
+                        localStorage.setItem("users", JSON.stringify(users) )
+                        inputNameForm.value = ""
+                        inputPasswordForm.value = ""
+                    }
+                } 
+            }
+  
     
     
 //knappen för att logga in som startar funktionen logga in
 
-    button1.addEventListener("click", loggaIn)
+        button1.addEventListener("click", loggaIn)
+/* funktion för att logga in användare
+if-satsen validerar att det finns en användare i local storage 
+med korrekt användarnamn och password.
+Om true loggas man in
+Om false så hamnar man på errorsidan*/
 
-    function loggaIn() {
-        
-        localStorage.setItem("users", JSON.stringify(users) )
-        let inputNameValue = inputName.value
-        let passwordValue = inputPassword.value
-   
-        localStorage.setItem("title", inputNameValue)
-/*if-sats, om det är korrekt namn och lösen så loggas man in på        
-huvudsida, om det inte är korrekt så hamnar man på error-sidan*/
-        let namesInArray = JSON.parse(localStorage.getItem("users")).some(person => person.name == inputNameValue) 
+            function loggaIn() {
+                
+                // localStorage.setItem("users", JSON.stringify(users) )
+                let inputNameValue = inputName.value
+                let passwordValue = inputPassword.value
 
-        let passwordsInArray = JSON.parse(localStorage.getItem("users")).some(person => person.password == passwordValue)
-      
-        if (namesInArray && passwordsInArray == true)
-        // (inputNameValue == JSON.parse(localStorage.getItem("users")) && passwordValue == JSON.parse(localStorage.getItem("users")))
-        //    { localStorage.setItem("name", "janne")
-            {localStorage.setItem("status", "inloggad")
-            nextPage()} 
-            //  else if (inputNameValue == JSON.parse(localStorage.getItem("users"))[1].name && JSON.parse(localStorage.getItem("users"))[1].password)
-            // //  {localStorage.setItem("name", "cornelia")
-            //  {localStorage.setItem("status", "inloggad")
-            //   nextPage()} 
-              else
-             {errorPage()}
-            //  JSON.parse(localStorage.getItem("users")).forEach(users => inputNameValue == users.name)
-            // JSON.parse(localStorage.getItem("users")).forEach(users => passwordValue == users.password)
-            inputName.value = ""           
-            inputPassword.value = ""  
-    }
-}
+/* localstorage skapar en key (title) med användarnamnet som kopplas till hälsnings-
+frasen på huvudsidan*/
+            
+                localStorage.setItem("title", inputNameValue)
 
+/*tar ut array från localStorage och matchar om det finns i name/password listan, om det gör det = true*/
+                
+
+/*tar ut array från localStorage och kör map(funktion för att med hjälp av inputnamn/password ta reda på vilket indexi arrayn de ligger i,
+detta för att kunna jämföra om de är samma i if-satsen*/
+
+                let indexOfObjectName = JSON.parse(localStorage.getItem("users")).map(function(e) {return e.name;}).indexOf(inputNameValue)
+         
+/*Array arrayPasswordTwo samlar alla index som eventuellt har samma password genom forloopen nedanför */
+                let arrayPasswordTwo = [];
+                
+                for (i=0;i<JSON.parse(localStorage.getItem("users")).length;i++) {
+                if (JSON.parse(localStorage.getItem("users"))[i].password == passwordValue) {
+                    arrayPasswordTwo.push(i)
+                }
+            }
+                console.log("arrayName" + arrayName)
+                console.log("index of objectName" + indexOfObjectName)
+                console.log("arraypasswordTwo" + arrayPasswordTwo)
+                console.log(arrayPasswordTwo)
+                console.log(arrayName)
+
+/*if-sats= om index för användarnamn matchar något av indexen med samma password= true annars false.*/ 
+
+                if (!arrayName.some(indexUsers => !arrayPasswordTwo.includes(indexUsers)) == true )
+                
+/* vid inloggning sätts status som inloggad i local storage, denna kontrolleras sedan vid uppdatering
+av sidan. Om status:inloggad finns är man kvar på huvudsidan, om inte, hamnar man på start-sidan*/                
+                    {localStorage.setItem("status", "inloggad")
+                    
+                    mainPage()} 
+                   
+                    else
+                    {errorPage()}
+                    inputName.value = ""           
+                    inputPassword.value = "" 
+                }   
+            }
+           
 /*huvudsidan*/
 
-function nextPage() {
-    
+    function mainPage() {
+        
 //element
-    
-    containerStart.className = "containerStartNone"
-    containerError.className = "containerErrorNone"
-    // const root = document.getElementById("root")
-    // root.innerHTML = ""
-    inputContainer.innerHTML = ""
-    
-    containerPage.className = "containerPage"
+        
+        containerStart.className = "containerStartNone"
+        containerError.className = "containerErrorNone"
+        inputContainer.innerHTML = ""
+        
+        containerPage.className = "containerPage"
 
-    // const header = document.createElement("header")
-    // header.className = "header"
-    
+        const containerLogOut = document.createElement("div")
+        containerLogOut.className = "containerLogOut"
 
-    const containerLogOut = document.createElement("div")
-    containerLogOut.className = "containerLogOut"
+        const button2 = document.createElement("button")
+        button2.innerText = "Logga ut"
 
-    const button2 = document.createElement("button")
-    button2.innerText = "Logga ut"
+        const mainPage = document.createElement("main")
+        mainPage.className = "mainPage"
 
-    const mainPage = document.createElement("main")
-    mainPage.className = "mainPage"
+        const headingPage = document.createElement("h1")
+        headingPage.className = "headingPage"
+        headingPage.innerText = "Välkommen till min sida, " + localStorage.getItem("title")
 
-    const headingPage = document.createElement("h1")
-    headingPage.className = "headingPage"
-    headingPage.innerText = "Välkommen till min sida, " + localStorage.getItem("title")
+        const footerPage = document.createElement("footer")
+        footerPage.className = "footerPage"
+        footerPage.innerText = "Copyright Footer"
 
-    const footerPage = document.createElement("footer")
-    footerPage.className = "footerPage"
-    footerPage.innerText = "Copyright Footer"
+        const picture = document.createElement("img")
+        picture.src = "img/cat-g457fa44ed_1280.jpg"
+        picture.className = "picture"
 
 //element appendade
 
-    root.append(containerPage)
-    // containerPage.append(header)
-    inputContainer.append(containerLogOut)
-    containerLogOut.append(button2)
-//navbar
-
-    // const menuArray = ["Home", "Om oss", "Kontakt"]
-    //     for (let i=0; i<menuArray.length; i++) {
-    //         const li = document.createElement("li")
-    //         li.innerText = menuArray[i]
-    //         ul.append(li)
-    //     }
-    //     ul.insertAdjacentElement("beforeend", button2)
+        root.append(containerPage)
+        inputContainer.append(containerLogOut)
+        containerLogOut.append(button2)
 
 //Logga ut knappen
 
-    button2.addEventListener("click", clearSite)
+        button2.addEventListener("click", clearSite)
 
 //content main page
 
-    containerPage.append(mainPage)
-    mainPage.append(headingPage)
-    containerPage.append(footerPage)
-    const picture = document.createElement("img")
-    picture.src = "img/cat-g457fa44ed_1280.jpg"
-    picture.className = "picture"
-    mainPage.append(picture)
-
-    
-
-}
+        containerPage.append(mainPage)
+        mainPage.append(headingPage)
+        containerPage.append(footerPage)
+        mainPage.append(picture)
+    }
 
 //error page
 
-function errorPage() {
+    function errorPage() {
+        containerError.innerHTML = ""
+     
+        containerStart.className = "containerStartError"
 
-    //Element
-    containerError.innerHTML = ""
-    // containerPage.innerHTML = ""
-    // containerStart.innerHTML = ""
 
-    containerStart.className = "containerStartError"
-
-    
-    containerError.className = "containerError"
-    const button3 = document.createElement("button")
-    button3.innerText = "Tillbaka till Skapa användare"
-    root.append(containerError)
-    
-    button3.addEventListener("click", clearSite)
-    const pError = document.createElement("p")
-    pError.innerText = "Det var fel användarnamn eller password. \nVar vänlig försök igen eller klicka på \nknappen för att kunna skapa ny användare"
-    pError.className ="pError"
-    containerError.append(pError)
-    containerError.append(button3)
-    
+        containerError.className = "containerError"
+        const button3 = document.createElement("button")
+        button3.innerText = "Tillbaka till Skapa användare"
+        root.append(containerError)
+        
+        button3.addEventListener("click", clearSite)
+        const pError = document.createElement("p")
+        pError.innerText = "Det var fel användarnamn eller password. \nVar vänlig försök igen eller klicka på \nknappen för att kunna skapa ny användare"
+        pError.className ="pError"
+        containerError.append(pError)
+        containerError.append(button3)
+        
+    }
 }
 
+function clearSite () {
+
+    const root = document.getElementById("root")
+    localStorage.removeItem("status")
+    localStorage.removeItem("title")
+    root.innerHTML = ""
+    
+    rootPage()
 }
