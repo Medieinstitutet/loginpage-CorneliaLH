@@ -29,9 +29,9 @@ function rootPage () {
 
     const inputPassword = document.createElement("input");
     inputPassword.placeholder = "Lösenord";
-        /* kan lägga till kod under för att få stjärnor istället för klartext, 
-        förstod det som det skulle vara klartext i denna uppgiften*/
-    // inputPassword.type = "password" 
+/* man kan lägga till kod under för att få stjärnor istället för klartext, 
+förstod det som det skulle vara klartext i denna uppgiften*/
+// inputPassword.type = "password" 
 
     const button1 = document.createElement("button");
     button1.innerText = "Logga in";
@@ -57,7 +57,7 @@ function rootPage () {
     const containerError = document.createElement("div");
 
 //funktion för att local storage ska vara min "single source of truth"
-//De redan inlagda användarna genereras vid första log in/skapande av användare
+//De redan inlagda användarna genereras vid load
     
     function getArrayFromLs() {
         let collectedUsersList = localStorage.getItem("users");
@@ -94,16 +94,16 @@ function rootPage () {
         containerPage.innerHTML = "";
         containerError.innerHTML = "";
 
-    /*if-sats för att kolla om det finns en status som inloggad
-    i local storage, om det finns det så stannar funktionen 
-    och går till huvudsidan istället*/
+/*if-sats för att kontrollera om det finns en status som inloggad
+i local storage, om det finns det så stannar funktionen 
+och går till huvudsidan istället*/
 
         if( inloggad === "inloggad") {
         mainPage()
         return}
         
 
-    //element
+//element
         
         root.append(containerStart);
         containerStart.className = "containerStart";
@@ -121,7 +121,7 @@ function rootPage () {
         containerStartContent.append(pStart);
         pStart.innerHTML ="Var vänlig skapa ny användare i formuläret nedanför:";
 
-    //skapa ny användare form
+//skapa ny användare form
 
         const form = document.createElement("form");
         form.id = "form";
@@ -133,11 +133,11 @@ function rootPage () {
         
         const inputPasswordForm = document.createElement("input");
         inputPasswordForm.placeholder = "Lösenord";
-        /* kan lägga till kod under för att få stjärnor istället för klartext, 
-        förstod det som det skulle vara klartext i denna uppgiften*/
-        // inputPasswordForm.type = "password"    
+/* kan lägga till kod under för att få stjärnor istället för klartext, 
+förstod det som det skulle vara klartext i denna uppgiften*/
+// inputPasswordForm.type = "password"    
         
-    //knapp 
+//knapp för att skapa ny användare
 
         const buttonNewUser = document.createElement("button");
         buttonNewUser.innerText = "Registrera ny användare",
@@ -151,9 +151,8 @@ function rootPage () {
 Validering för: om textfält är tomt
                 om användarnamn eller password är kortare än 3 bokstäver
                 om användarnamn redan finns
-Om ingen av dem är true, får man skapa en användare som pushas till array och lagars i 
-local storage
-Inputfältet töms därefter*/
+Om ingen av dem är true, får man skapa en användare som pushas till array och lagras i 
+local storage. Inputfältet töms därefter*/
 
             function submitNewUser(e) {
                 e.preventDefault();
@@ -193,6 +192,7 @@ Inputfältet töms därefter*/
 //knappen för att logga in som startar funktionen logga in
 
         button1.addEventListener("click", loggaIn);
+
 /* funktion för att logga in användare
 if-satsen :Om true loggas man in, om false så hamnar man på errorsidan*/
 
@@ -211,7 +211,7 @@ detta för att kunna jämföra med lösenord senare om de är samma i if-satsen*
 
                 let indexOfObjectName = JSON.parse(localStorage.getItem("users")).map(function(user) {return user.name;}).indexOf(inputNameValue);
 
-/*tar reda på om det finns namn som har SAMMA lösenord, då får jag tillbaka flera index i en lista genom for-loopen*/
+/*tar reda på om det finns namn som har SAMMA lösenord, då får jag tillbaka flera index (om användare råkar registrera samma lösenord) i en lista genom for-loopen*/
                 let arrayPassword = [];
                 
                 for (i=0;i<JSON.parse(localStorage.getItem("users")).length;i++) {
@@ -225,8 +225,8 @@ detta för att kunna jämföra med lösenord senare om de är samma i if-satsen*
 
                 let arrayName = [indexOfObjectName];  
 
-/*if-sats= om index i som kommer fram i indexOfObjectName (kan bara finnas ett index då man inte får ha
-samma användarnamn) matchar ett av indexen i password-listan (kan vara flera då man teoretiskt sett kan
+/*if-sats= om namn-index (kan bara finnas ett index då man inte får ha samma användarnamn) matchar ett av indexen 
+i password-listan (kan vara flera då man teoretiskt sett kan
 ha valt samma password), så loggas man in*/      
 
                 if (!arrayName.some(users => !arrayPassword.includes(users)) == true )
