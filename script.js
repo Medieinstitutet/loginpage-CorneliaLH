@@ -1,7 +1,7 @@
 /*sidan startar med en eventlyssnare för att 
 starta första funktionen*/
 
-window.addEventListener("load", rootPage)
+window.addEventListener("load", rootPage);
 
 
 
@@ -11,63 +11,66 @@ function rootPage () {
 
 /*Element som alltid visas*/
 
-    const root = document.getElementById("root")
-    const header = document.createElement("header")
-    header.className = "header"
+    const root = document.getElementById("root");
+    const header = document.createElement("header");
+    header.className = "header";
 
-    const logoContainer = document.createElement("h1")
-    logoContainer.className = "logoContainer"
+    const logoContainer = document.createElement("h1");
+    logoContainer.className = "logoContainer";
 
-    const logo = document.createElement("i") 
-    logo.className = "fas fa-tram"
+    const logo = document.createElement("i");
+    logo.className = "fas fa-tram";
 
-    const inputContainer = document.createElement("div")
-    inputContainer.className = "inputContainer"
+    const inputContainer = document.createElement("div");
+    inputContainer.className = "inputContainer";
 
-    const inputName = document.createElement("input")
-    inputName.placeholder = "Användarnamn"
+    const inputName = document.createElement("input");
+    inputName.placeholder = "Användarnamn";
 
-    const inputPassword = document.createElement("input")
-    inputPassword.placeholder = "Lösenord"
+    const inputPassword = document.createElement("input");
+    inputPassword.placeholder = "Lösenord";
+        /* kan lägga till kod under för att få stjärnor istället för klartext, 
+        förstod det som det skulle vara klartext i denna uppgiften*/
+    // inputPassword.type = "password" 
 
-    const button1 = document.createElement("button")
-    button1.innerText = "Logga in"
+    const button1 = document.createElement("button");
+    button1.innerText = "Logga in";
 
-    const footerPage = document.createElement("footer")
-    footerPage.className = "footerPage"
-    footerPage.innerText = "Copyright Footer"
+    const footerPage = document.createElement("footer");
+    footerPage.className = "footerPage";
+    footerPage.innerText = "Copyright Footer";
     
 //element som appendas till DOM.  
     
-    header.append(logoContainer)
-    header.append(inputContainer)
-    logoContainer.append(logo)
-    inputContainer.append(inputName)
-    inputContainer.append(inputPassword)
-    root.append(header)
-    inputContainer.append(button1)
-    root.append(footerPage)
+    header.append(logoContainer);
+    header.append(inputContainer);
+    logoContainer.append(logo);
+    inputContainer.append(inputName);
+    inputContainer.append(inputPassword);
+    root.append(header);
+    inputContainer.append(button1);
+    root.append(footerPage);
     
 
-    const containerStart = document.createElement("div")
-    const containerPage = document.createElement("div")
-    const containerError = document.createElement("div")
+    const containerStart = document.createElement("div");
+    const containerPage = document.createElement("div");
+    const containerError = document.createElement("div");
 
 //funktion för att local storage ska vara min "single source of truth"
 //De redan inlagda användarna genereras vid första log in/skapande av användare
     
     function getArrayFromLs() {
-        let collectedUsersList = localStorage.getItem("users")
+        let collectedUsersList = localStorage.getItem("users");
     
-        let users = []
+        let users = [];
     
         if(collectedUsersList) {
-            users = JSON.parse(collectedUsersList)
+            users = JSON.parse(collectedUsersList);
         } 
-        return users
+        return users;
     }
     
-    let users = getArrayFromLs()
+    let users = getArrayFromLs();
 
 //Redan inlagda users, för att undvika dubletter kompletterat med if-sats
     if (!localStorage.users)
@@ -76,65 +79,73 @@ function rootPage () {
                 {name: "cornelia",
                 password: "prova"})
 
-    localStorage.setItem("users", JSON.stringify(users))}
+    localStorage.setItem("users", JSON.stringify(users))};
 
-    let inloggad = localStorage.getItem("status")
+    let inloggad = localStorage.getItem("status");
+
+//
+//START-SIDAN
+//
 
     startSite()
 
         function startSite()  {
 
-        containerPage.innerHTML = ""
-        containerError.innerHTML = ""
+        containerPage.innerHTML = "";
+        containerError.innerHTML = "";
 
     /*if-sats för att kolla om det finns en status som inloggad
     i local storage, om det finns det så stannar funktionen 
     och går till huvudsidan istället*/
 
         if( inloggad === "inloggad") {
-        mainPage()}
+        mainPage()
+        return}
+        
 
     //element
         
-        root.append(containerStart)
-        containerStart.className = "containerStart"
+        root.append(containerStart);
+        containerStart.className = "containerStart";
         
-        const containerStartContent = document.createElement("section")
-        containerStart.append(containerStartContent)
-        containerStartContent.className = "containerStartContent"
+        const containerStartContent = document.createElement("section");
+        containerStart.append(containerStartContent);
+        containerStartContent.className = "containerStartContent";
 
-        const headingStart = document.createElement("h2")
-        headingStart.className = "headingStart"
-        containerStartContent.append(headingStart)
-        headingStart.innerHTML = "Välkommen"
+        const headingStart = document.createElement("h2");
+        headingStart.className = "headingStart";
+        containerStartContent.append(headingStart);
+        headingStart.innerHTML = "Välkommen";
 
-        const pStart = document.createElement("p")
-        containerStartContent.append(pStart)
-        pStart.innerHTML ="Var vänlig skapa ny användare i formulöret nedanför:"
+        const pStart = document.createElement("p");
+        containerStartContent.append(pStart);
+        pStart.innerHTML ="Var vänlig skapa ny användare i formuläret nedanför:";
 
     //skapa ny användare form
 
-        const form = document.createElement("form")
-        form.id = "form"
-        containerStartContent.append(form)
+        const form = document.createElement("form");
+        form.id = "form";
+        containerStartContent.append(form);
 
-        const inputNameForm = document.createElement("input")
-        inputNameForm.placeholder = "Användarnamn"
-        inputNameForm.type = "text"
+        const inputNameForm = document.createElement("input");
+        inputNameForm.placeholder = "Användarnamn";
+        inputNameForm.type = "text";
         
-        const inputPasswordForm = document.createElement("input")
-        inputPasswordForm.placeholder = "Password"
-        inputPasswordForm.type = "password"    
-
+        const inputPasswordForm = document.createElement("input");
+        inputPasswordForm.placeholder = "Lösenord";
+        /* kan lägga till kod under för att få stjärnor istället för klartext, 
+        förstod det som det skulle vara klartext i denna uppgiften*/
+        // inputPasswordForm.type = "password"    
+        
     //knapp 
 
-        const buttonNewUser = document.createElement("button")
-        buttonNewUser.innerText = "Registrera new användare"
-        buttonNewUser.type = "submit"
+        const buttonNewUser = document.createElement("button");
+        buttonNewUser.innerText = "Registrera ny användare",
+        buttonNewUser.type = "submit";
 
-        form.append(inputNameForm,inputPasswordForm,buttonNewUser)
+        form.append(inputNameForm,inputPasswordForm,buttonNewUser);
 
-        buttonNewUser.addEventListener("click", submitNewUser)
+        buttonNewUser.addEventListener("click", submitNewUser);
     
 /*Skapa ny användare, submit stoppas från att ladda om sidan genom eventet preventdefault
 Validering för: om textfält är tomt
@@ -146,22 +157,22 @@ Inputfältet töms därefter*/
 
             function submitNewUser(e) {
                 e.preventDefault();
-                let inputNameFormValue = inputNameForm.value
-                let inputPasswordFormValue = inputPasswordForm.value
+                let inputNameFormValue = inputNameForm.value;
+                let inputPasswordFormValue = inputPasswordForm.value;
 
                 validateForm()
                 function validateForm() {
                     if (inputNameFormValue == "" || inputPasswordFormValue =="") {
-                        alert("Text måste skrivas i fälten")
-                        inputNameForm.value = ""
-                        inputPasswordForm.value = ""
+                        alert("Text måste skrivas i fälten");
+                        inputNameForm.value = "";
+                        inputPasswordForm.value = "";
                         return }
                         
                         
                    if (inputNameForm.value.length < 3 || inputPasswordForm.value.length < 3)
                     { alert("Användarnamn och password ska bestå av minst 3 bokstäver")
-                    inputNameForm.value = ""
-                    inputPasswordForm.value = ""
+                    inputNameForm.value = "";
+                    inputPasswordForm.value = "";
                     return } 
                         
                     if (JSON.parse(localStorage.getItem("users")).some(person => person.name === inputNameFormValue))
@@ -170,9 +181,9 @@ Inputfältet töms därefter*/
                         users.push(
                             {name: inputNameFormValue,
                             password: inputPasswordFormValue})
-                        localStorage.setItem("users", JSON.stringify(users) )
-                        inputNameForm.value = ""
-                        inputPasswordForm.value = ""
+                        localStorage.setItem("users", JSON.stringify(users) );
+                        inputNameForm.value = "";
+                        inputPasswordForm.value = "";
                     }
                 } 
             }
@@ -181,157 +192,153 @@ Inputfältet töms därefter*/
     
 //knappen för att logga in som startar funktionen logga in
 
-        button1.addEventListener("click", loggaIn)
+        button1.addEventListener("click", loggaIn);
 /* funktion för att logga in användare
-if-satsen validerar att det finns en användare i local storage 
-med korrekt användarnamn och password.
-Om true loggas man in
-Om false så hamnar man på errorsidan*/
+if-satsen :Om true loggas man in, om false så hamnar man på errorsidan*/
 
             function loggaIn() {
                 
-                // localStorage.setItem("users", JSON.stringify(users) )
-                let inputNameValue = inputName.value
-                let passwordValue = inputPassword.value
+                let inputNameValue = inputName.value;
+                let passwordValue = inputPassword.value;
 
 /* localstorage skapar en key (title) med användarnamnet som kopplas till hälsnings-
 frasen på huvudsidan*/
             
-                localStorage.setItem("title", inputNameValue)
+                localStorage.setItem("title", inputNameValue);
 
-/*tar ut array från localStorage och matchar om det finns i name/password listan, om det gör det = true*/
-                
-                // let namesInArray = JSON.parse(localStorage.getItem("users")).some(users => users.name == inputNameValue)
-                // let passwordsInArray = JSON.parse(localStorage.getItem("users")).some(users => users.password == passwordValue)
+/*tar ut array från localStorage och kör map-funktion för att med hjälp av inputnamn ta reda på vilket index i arrayn namnet ligger i,
+detta för att kunna jämföra med lösenord senare om de är samma i if-satsen*/
 
-/*tar ut array från localStorage och kör map(funktion för att med hjälp av inputnamn/password ta reda på vilket indexi arrayn de ligger i,
-detta för att kunna jämföra om de är samma i if-satsen*/
+                let indexOfObjectName = JSON.parse(localStorage.getItem("users")).map(function(e) {return e.name;}).indexOf(inputNameValue);
 
-                let indexOfObjectName = JSON.parse(localStorage.getItem("users")).map(function(e) {return e.name;}).indexOf(inputNameValue)
-                
+/*tar reda på om det finns namn som har SAMMA lösenord, då får jag tillbaka flera index i en lista genom for-loopen*/
                 let arrayPasswordTwo = [];
                 
                 for (i=0;i<JSON.parse(localStorage.getItem("users")).length;i++) {
                 if (JSON.parse(localStorage.getItem("users"))[i].password == passwordValue) {
-                    arrayPasswordTwo.push(i)
+                    arrayPasswordTwo.push(i);
                   
                 }
             }
                 
-                
-                let arrayName = [indexOfObjectName]
+// arrayName = gör om index som returneras i indesOfObjectName till en lista för att kunna jämföra listor längre ned
+
+                let arrayName = [indexOfObjectName];
                
-                console.log("arrayName" + arrayName)
-                console.log("index of objectName" + indexOfObjectName)
-                console.log("arraypasswordTwo" + arrayPasswordTwo)
-                console.log(arrayPasswordTwo)
-                console.log(arrayName)
+                console.log("arrayName" + arrayName);
+                console.log("index of objectName" + indexOfObjectName);
+                console.log("arraypasswordTwo" + arrayPasswordTwo);
+                console.log(arrayPasswordTwo);
+                console.log(arrayName);      
 
-                console.log()
+/*if-sats= om index i som kommer fram i indexOfObjectName (kan bara finnas ett index då man inte får ha
+samma användarnamn) matchar ett av indexen i password-listan (kan vara flera då man teoretiskt sett kan
+ha valt samma password), så loggas man in*/      
 
-
-
-                
-
-/*if-sats= om namn matchar ett av indexen i password-listan loggas man in*/      
                 if (!arrayName.some(indexUsers => !arrayPasswordTwo.includes(indexUsers)) == true )
                 
 /* vid inloggning sätts status som inloggad i local storage, denna kontrolleras sedan vid uppdatering
-av sidan. Om status:inloggad finns är man kvar på huvudsidan, om inte, hamnar man på start-sidan*/                
-                    {localStorage.setItem("status", "inloggad")
+av sidan. Om status:inloggad finns i localStorage är man kvar på huvudsidan, om inte, hamnar man på start-sidan*/      
+
+                    {localStorage.setItem("status", "inloggad");
                     
                     mainPage()} 
-                   
+
+/* Om man inte uppfyller kraven hamnar man på error-sidan*/    
+
                     else
                     {errorPage()}
-                    inputName.value = ""           
-                    inputPassword.value = ""  
+                    inputName.value = "" ;      
+                    inputPassword.value = ""  ;
 
                 }   
             }
            
     
 
-/*huvudsidan*/
+//
+//HUVUD-SIDAN
+//
 
     function mainPage() {
         
 //element
         
-        containerStart.className = "containerStartNone"
-        containerError.className = "containerErrorNone"
-        inputContainer.innerHTML = ""
+        containerStart.className = "containerStartNone";
+        containerError.className = "containerErrorNone";
+        inputContainer.innerHTML = "";
         
-        containerPage.className = "containerPage"
+        containerPage.className = "containerPage";
 
-        const containerLogOut = document.createElement("div")
-        containerLogOut.className = "containerLogOut"
+        const containerLogOut = document.createElement("div");
+        containerLogOut.className = "containerLogOut";
 
-        const button2 = document.createElement("button")
-        button2.innerText = "Logga ut"
+        const button2 = document.createElement("button");
+        button2.innerText = "Logga ut";
 
-        const mainPage = document.createElement("main")
-        mainPage.className = "mainPage"
+        const mainPage = document.createElement("main");
+        mainPage.className = "mainPage";
 
-        const headingPage = document.createElement("h1")
-        headingPage.className = "headingPage"
-        headingPage.innerText = "Välkommen till min sida, " + localStorage.getItem("title")
+        const headingPage = document.createElement("h1");
+        headingPage.className = "headingPage";
+        headingPage.innerText = "Välkommen till min sida, " + localStorage.getItem("title") +"!";
 
-        const footerPage = document.createElement("footer")
-        footerPage.className = "footerPage"
-        footerPage.innerText = "Copyright Footer"
+        const footerPage = document.createElement("footer");
+        footerPage.className = "footerPage";
+        footerPage.innerText = "Copyright Footer";
 
-        const picture = document.createElement("img")
-        picture.src = "img/cat-g457fa44ed_1280.jpg"
-        picture.className = "picture"
+        const picture = document.createElement("img");
+        picture.src = "img/cat-g457fa44ed_1280.jpg";
+        picture.className = "picture";
 
 //element appendade
 
-        root.append(containerPage)
-        inputContainer.append(containerLogOut)
-        containerLogOut.append(button2)
+        root.append(containerPage);
+        inputContainer.append(containerLogOut);
+        containerLogOut.append(button2);
 
 //Logga ut knappen
 
-        button2.addEventListener("click", clearSite)
+        button2.addEventListener("click", clearSite);
 
 //content main page
 
-        containerPage.append(mainPage)
-        mainPage.append(headingPage)
-        containerPage.append(footerPage)
-        mainPage.append(picture)
+        containerPage.append(mainPage);
+        mainPage.append(headingPage);
+        containerPage.append(footerPage);
+        mainPage.append(picture);
     }
 
-//error page
+//
+//ERROR-SIDAN
+//
 
     function errorPage() {
-        containerError.innerHTML = ""
+        containerError.innerHTML = "";
      
-        containerStart.className = "containerStartError"
+        containerStart.className = "containerStartError";
 
 
-        containerError.className = "containerError"
-        const button3 = document.createElement("button")
-        button3.innerText = "Tillbaka till Skapa användare"
-        root.append(containerError)
+        containerError.className = "containerError";
+        const button3 = document.createElement("button");
+        button3.innerText = "Tillbaka till Skapa användare";
+        root.append(containerError);
         
-        button3.addEventListener("click", clearSite)
-        const pError = document.createElement("p")
-        pError.innerText = "Det var fel användarnamn eller password. \nVar vänlig försök igen eller klicka på \nknappen för att kunna skapa ny användare"
-        pError.className ="pError"
-        containerError.append(pError)
-        containerError.append(button3)
-        
+        button3.addEventListener("click", clearSite);
+        const pError = document.createElement("p");
+        pError.innerText = "Det var fel användarnamn eller password. \nVar vänlig försök igen eller klicka på \nknappen för att kunna skapa ny användare";
+        pError.className ="pError";
+        containerError.append(pError);
+        containerError.append(button3);
     }
 }
 
 function clearSite () {
 
-    const root = document.getElementById("root")
-    localStorage.removeItem("status")
-    localStorage.removeItem("title")
-    root.innerHTML = ""
+    const root = document.getElementById("root");
+    localStorage.removeItem("status");
+    localStorage.removeItem("title");
+    root.innerHTML = "";
     
     rootPage()
 }
