@@ -322,7 +322,7 @@ av sidan. Om status:inloggad finns i localStorage är man kvar på huvudsidan, o
         
         button3.addEventListener("click", clearSite);
         const pError = document.createElement("p");
-        pError.innerText = "Det var fel användarnamn eller password. \nVar vänlig försök igen eller klicka på \nknappen för att kunna skapa ny användare";
+        pError.innerText = "Det var fel användarnamn eller lösenord. \nVar vänlig försök igen eller klicka på \nknappen för att kunna skapa ny användare";
         pError.className ="pError";
         containerError.append(pError);
         containerError.append(button3);
