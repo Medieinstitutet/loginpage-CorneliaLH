@@ -209,33 +209,27 @@ frasen på huvudsidan*/
 /*tar ut array från localStorage och kör map-funktion för att med hjälp av inputnamn ta reda på vilket index i arrayn namnet ligger i,
 detta för att kunna jämföra med lösenord senare om de är samma i if-satsen*/
 
-                let indexOfObjectName = JSON.parse(localStorage.getItem("users")).map(function(e) {return e.name;}).indexOf(inputNameValue);
+                let indexOfObjectName = JSON.parse(localStorage.getItem("users")).map(function(user) {return user.name;}).indexOf(inputNameValue);
 
 /*tar reda på om det finns namn som har SAMMA lösenord, då får jag tillbaka flera index i en lista genom for-loopen*/
-                let arrayPasswordTwo = [];
+                let arrayPassword = [];
                 
                 for (i=0;i<JSON.parse(localStorage.getItem("users")).length;i++) {
                 if (JSON.parse(localStorage.getItem("users"))[i].password == passwordValue) {
-                    arrayPasswordTwo.push(i);
+                    arrayPassword.push(i);
                   
                 }
             }
                 
 // arrayName = gör om index som returneras i indesOfObjectName till en lista för att kunna jämföra listor längre ned
 
-                let arrayName = [indexOfObjectName];
-               
-                console.log("arrayName" + arrayName);
-                console.log("index of objectName" + indexOfObjectName);
-                console.log("arraypasswordTwo" + arrayPasswordTwo);
-                console.log(arrayPasswordTwo);
-                console.log(arrayName);      
+                let arrayName = [indexOfObjectName];  
 
 /*if-sats= om index i som kommer fram i indexOfObjectName (kan bara finnas ett index då man inte får ha
 samma användarnamn) matchar ett av indexen i password-listan (kan vara flera då man teoretiskt sett kan
 ha valt samma password), så loggas man in*/      
 
-                if (!arrayName.some(indexUsers => !arrayPasswordTwo.includes(indexUsers)) == true )
+                if (!arrayName.some(users => !arrayPassword.includes(users)) == true )
                 
 /* vid inloggning sätts status som inloggad i local storage, denna kontrolleras sedan vid uppdatering
 av sidan. Om status:inloggad finns i localStorage är man kvar på huvudsidan, om inte, hamnar man på start-sidan*/      
