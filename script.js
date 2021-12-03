@@ -77,7 +77,9 @@ förstod det som det skulle vara klartext i denna uppgiften*/
     {users.push({name: "janne",
                 password: "test"}, 
                 {name: "cornelia",
-                password: "prova"})
+                password: "prova"},
+                {name: "victor",
+                password: "test"})
 
     localStorage.setItem("users", JSON.stringify(users))};
 
