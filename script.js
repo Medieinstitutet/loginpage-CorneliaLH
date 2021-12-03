@@ -154,12 +154,16 @@ Inputfältet töms därefter*/
                     if (inputNameFormValue == "" || inputPasswordFormValue =="") {
                         alert("Text måste skrivas i fälten")
                         inputNameForm.value = ""
-                        inputPasswordForm.value = ""}
+                        inputPasswordForm.value = ""
+                        return }
                         
-                    if (inputNameForm.value.length < 3 || inputPasswordForm.value.length < 3)
+                        
+                   if (inputNameForm.value.length < 3 || inputPasswordForm.value.length < 3)
                     { alert("Användarnamn och password ska bestå av minst 3 bokstäver")
                     inputNameForm.value = ""
-                    inputPasswordForm.value = ""} 
+                    inputPasswordForm.value = ""
+                    return } 
+                        
                     if (JSON.parse(localStorage.getItem("users")).some(person => person.name === inputNameFormValue))
                     {alert("Användarnamn är upptaget, försök med annat")}
                     else {
