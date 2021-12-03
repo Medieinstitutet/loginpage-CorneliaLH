@@ -214,7 +214,7 @@ detta för att kunna jämföra om de är samma i if-satsen*/
                 console.log("index of objectName" + indexOfObjectName)
                 console.log("arraypasswordTwo" + arrayPasswordTwo)
                 console.log(arrayPasswordTwo)
-                console.log(arrayName)
+            
 
 /*if-sats= om index för användarnamn matchar något av indexen med samma password= true annars false.*/ 
 
