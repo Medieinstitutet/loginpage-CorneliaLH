@@ -43,12 +43,9 @@ förstod det som det skulle vara klartext i denna uppgiften*/
 //element som appendas till DOM.  
     
     header.append(logoContainer);
-    header.append(inputContainer);
     logoContainer.append(logo);
-    inputContainer.append(inputName);
-    inputContainer.append(inputPassword);
+    header.append(inputContainer);
     root.append(header);
-    inputContainer.append(button1);
     root.append(footerPage);
     
 
@@ -109,6 +106,9 @@ och går till huvudsidan istället*/
         
         root.append(containerStart);
         containerStart.className = "containerStart";
+        inputContainer.append(inputName);
+        inputContainer.append(inputPassword);
+        inputContainer.append(button1);
         
         const containerStartContent = document.createElement("section");
         containerStart.append(containerStartContent);
@@ -313,7 +313,9 @@ av sidan. Om status:inloggad finns i localStorage är man kvar på huvudsidan, o
         containerError.innerHTML = "";
      
         containerStart.className = "containerStartError";
-
+        inputContainer.append(inputName);
+        inputContainer.append(inputPassword);
+        inputContainer.append(button1);
 
         containerError.className = "containerError";
         const button3 = document.createElement("button");
